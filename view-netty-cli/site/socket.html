@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<script style="text/javascript">
+  var socket ;
+  if(!window.WebSocket){
+  window.WebSocket = window.MozWebSocket;
+  }
+  if(window.WebSocket){
+  socket = new WebSocket("ws://localhost:8888/websocket");
+  socket.onmessage = function(event){
+  var ta = document.getElementById("text");
+  ta.value +=event.data+"\r\n";
+  };
+  socket.onopen = function(event){
+  var ta = document.getElementById("text");
+  ta.value="当前您的浏览器支持websocket";
+  }
+  socket.onclose = function(event){
+  var ta = document.getElementById("text");
+  ta.value="已经关闭";
+  }
+  }
+
+  function send(message){
+    if(!window.WebSocket) return ;
+    if(socket.readyState==WebSocket.OPEN){
+        socket.send(message);
+    }else{
+       alert("SOCKet简历失败");
+    }
+  }
+</script>
+<body>
+<form
+onsubmit = "return false;" >
+  输入信息：<input type= "text" id ="text" onclick="send(this.form.text.value)">
+  <br/>
+  接受信息:
+<textarea id = "rec"> </textarea>
+  </form>
+  </body>
+  </html>
