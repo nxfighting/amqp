@@ -1,0 +1,11 @@
+spring:
+  rabbitmq:
+    host: 47.96.93.75
+    username: zhougf
+    password: zhougf
+    virtual-host: /
+    port: 5672
+    template:
+      default-receive-queue: spring.queue
+      exchange: spring.exchange
+      routing-key: spring.queue

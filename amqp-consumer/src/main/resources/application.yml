@@ -1,0 +1,26 @@
+spring:
+  rabbitmq:
+    host: 47.96.93.75
+    username: zhougf
+    password: zhougf
+    virtual-host: /
+    port: 5672
+    template:
+      default-receive-queue: spring.queue
+      exchange: spring.exchange
+      routing-key: spring.queue
+    listener:
+      direct:
+        acknowledge-mode: manual
+        consumers-per-queue: 100
+        prefetch: 10
+        retry:
+          enabled: false
+          max-attempts: 3
+        auto-startup: true
+      simple:
+        concurrency: 5
+        max-concurrency: 15
+    ssl:
+      validate-server-certificate: false
+    connection-timeout: 0
